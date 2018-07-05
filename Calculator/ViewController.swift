@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     @IBAction func numberPressed(_ sender: UIButton) {
         if display.text!.count>12 || display.text!=="OVERLOAD"{
-            display.text="OVERLOAD"
+//            display.text="OVERLOAD"
             return
         }
         if display.text!.count==0 && sender.title(for: .normal)!=="."{
@@ -38,6 +38,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addPushed(_ sender: UIButton) {
+        if display.text=="OVERLOAD"{
+            return
+        }
         
         if display.text!.count==0{
             op_1=0
@@ -49,6 +52,9 @@ class ViewController: UIViewController {
         operation="+"
     }
     @IBAction func subtractPushed(_ sender: UIButton) {
+        if display.text=="OVERLOAD"{
+            return
+        }
         if display.text!.count==0{
             op_1=0
         }
@@ -59,6 +65,30 @@ class ViewController: UIViewController {
         operation="-"
     }
     @IBAction func multiplyPushed(_ sender: UIButton) {
+        if display.text=="OVERLOAD"{
+            return
+        }
+        if display.text!.count==0{
+            op_1=0
+        }
+        else{
+            op_1=Double(display.text!)!
+        }
+        display.text=""
+        operation="*"
+    }
+    @IBAction func dividePushed(_ sender: UIButton) {
+        if display.text=="OVERLOAD"{
+            return
+        }
+        if display.text!.count==0{
+            op_1=0
+        }
+        else{
+            op_1=Double(display.text!)!
+        }
+        display.text=""
+        operation="/"
     }
     @IBAction func resetPushed(_ sender: UIButton) {
         display.text=""
@@ -67,12 +97,20 @@ class ViewController: UIViewController {
         operation=""
     }
     @IBAction func signPushed(_ sender: UIButton) {
+        if display.text=="OVERLOAD"{
+            return
+        }
         if display.text!.count==0{
             return
         }
         var number:Double = Double(display.text!)!
         number = -number
-        display.text=String(number)
+        if floor(number)==number{
+            display.text=String(Int(number))
+        }
+        else{
+            display.text=String(number)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +132,8 @@ class ViewController: UIViewController {
                 display.text=String(Int(op_1+op_2))
             }
             else{
-            display.text=String(op_1+op_2)
+                let numDigits=String(Int(op_1+op_2)).count
+                display.text=String(format:"%.\(11-numDigits)f",op_1+op_2)
             }
             op_1=0
             op_2=0
@@ -106,12 +145,37 @@ class ViewController: UIViewController {
                 display.text=String(Int(op_1-op_2))
             }
             else{
-                display.text=String(op_1-op_2)
+                let numDigits=String(Int(op_1-op_2)).count
+                display.text=String(format:"%.\(11-numDigits)f",op_1-op_2)
             }
             op_1=0
             op_2=0
             operation=""
 //            op_1=op_2
+        }
+        else if operation=="*"{
+            if floor(op_1*op_2)==op_1*op_2{
+                display.text=String(Int(op_1*op_2))
+            }
+            else{
+                let numDigits=String(Int(op_1*op_2)).count
+                display.text=String(format:"%.\(11-numDigits)f",op_1*op_2)
+            }
+            op_1=0
+            op_2=0
+            operation=""
+        }
+        else if operation=="/"{
+            if floor(op_1/op_2)==op_1/op_2{
+                display.text=String(Int(op_1/op_2))
+            }
+            else{
+                let numDigits=String(Int(op_1/op_2)).count
+                display.text=String(format:"%.\(11-numDigits)f",op_1/op_2)
+            }
+            op_1=0
+            op_2=0
+            operation=""
         }
     }
     override func didReceiveMemoryWarning() {
