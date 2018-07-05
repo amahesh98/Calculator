@@ -10,9 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var numbers: [UIButton]!
+    @IBOutlet weak var display: UILabel!
+    @IBAction func numberPressed(_ sender: UIButton) {
+        display.text!.append(sender.title(for: .normal)!)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        display.text=""
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +25,6 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    
 }
 
