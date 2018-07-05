@@ -48,11 +48,31 @@ class ViewController: UIViewController {
         display.text=""
         operation="+"
     }
+    @IBAction func subtractPushed(_ sender: UIButton) {
+        if display.text!.count==0{
+            op_1=0
+        }
+        else{
+            op_1=Double(display.text!)!
+        }
+        display.text=""
+        operation="-"
+    }
+    @IBAction func multiplyPushed(_ sender: UIButton) {
+    }
     @IBAction func resetPushed(_ sender: UIButton) {
         display.text=""
         op_1=0
         op_2=0
         operation=""
+    }
+    @IBAction func signPushed(_ sender: UIButton) {
+        if display.text!.count==0{
+            return
+        }
+        var number:Double = Double(display.text!)!
+        number = -number
+        display.text=String(number)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +83,12 @@ class ViewController: UIViewController {
         if operation==""{
             return
         }
-        op_2=Double(display.text!)!
+        if display.text!.count==0{
+            op_2=0
+        }
+        else{
+            op_2=Double(display.text!)!
+        }
         if operation=="+"{
             if floor(op_1+op_2)==op_1+op_2{
                 display.text=String(Int(op_1+op_2))
@@ -73,6 +98,20 @@ class ViewController: UIViewController {
             }
             op_1=0
             op_2=0
+            operation=""
+//            op_1=op_2
+        }
+        else if operation=="-"{
+            if floor(op_1-op_2)==op_1-op_2{
+                display.text=String(Int(op_1-op_2))
+            }
+            else{
+                display.text=String(op_1-op_2)
+            }
+            op_1=0
+            op_2=0
+            operation=""
+//            op_1=op_2
         }
     }
     override func didReceiveMemoryWarning() {

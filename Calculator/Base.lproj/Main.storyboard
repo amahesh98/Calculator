@@ -56,6 +56,9 @@
                                                 <state key="normal" title="±">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fIw-KV-BMQ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ziq-mM-Ov4">
                                                 <rect key="frame" x="188.5" y="0.0" width="92.5" height="97"/>
@@ -118,6 +121,9 @@
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="multiplyPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nfl-tH-Wvc"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -164,6 +170,9 @@
                                                 <state key="normal" title="-">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="subtractPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4cv-20-g9Y"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
