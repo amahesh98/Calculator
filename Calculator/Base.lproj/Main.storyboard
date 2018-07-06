@@ -67,6 +67,9 @@
                                                 <state key="normal" title="%">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="modPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y0A-LC-wKw"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83c-ac-Hta">
                                                 <rect key="frame" x="283" y="0.0" width="92" height="97"/>

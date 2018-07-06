@@ -12,12 +12,18 @@ class ViewController: UIViewController {
     var op_1:Double=0
     var operation:String=""
     var op_2:Double=0
+    var last_op2:Double=0
+    var last_operation:String=""
+    var lastOp=false
     @IBOutlet var numbers: [UIButton]!
     @IBOutlet weak var display: UILabel!
     @IBAction func numberPressed(_ sender: UIButton) {
         if display.text!.count>12 || display.text!=="OVERLOAD"{
 //            display.text="OVERLOAD"
             return
+        }
+        if operation=="="{
+            display.text=""
         }
         if display.text!.count==0 && sender.title(for: .normal)!=="."{
             display.text="0."
@@ -38,6 +44,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addPushed(_ sender: UIButton) {
+        lastOp=false
         if display.text=="OVERLOAD"{
             return
         }
@@ -52,6 +59,7 @@ class ViewController: UIViewController {
         operation="+"
     }
     @IBAction func subtractPushed(_ sender: UIButton) {
+        lastOp=false
         if display.text=="OVERLOAD"{
             return
         }
@@ -65,6 +73,7 @@ class ViewController: UIViewController {
         operation="-"
     }
     @IBAction func multiplyPushed(_ sender: UIButton) {
+        lastOp=false
         if display.text=="OVERLOAD"{
             return
         }
@@ -78,6 +87,7 @@ class ViewController: UIViewController {
         operation="*"
     }
     @IBAction func dividePushed(_ sender: UIButton) {
+        lastOp=false
         if display.text=="OVERLOAD"{
             return
         }
@@ -89,6 +99,16 @@ class ViewController: UIViewController {
         }
         display.text=""
         operation="/"
+    }
+    
+    @IBAction func modPushed(_ sender: UIButton) {
+        if display.text=="OVERLOAD"{
+            return
+        }
+        if display.text!.count==0{
+            display.text="0"
+        }
+        display.text=String(Double(display.text!)!/100)
     }
     @IBAction func resetPushed(_ sender: UIButton) {
         display.text=""
@@ -121,11 +141,17 @@ class ViewController: UIViewController {
         if operation==""{
             return
         }
+        
         if display.text!.count==0{
             op_2=0
         }
         else{
             op_2=Double(display.text!)!
+        }
+        if lastOp && operation=="="{
+            op_1=Double(display.text!)!
+            op_2=last_op2
+            operation=last_operation
         }
         if operation=="+"{
             if floor(op_1+op_2)==op_1+op_2{
@@ -136,8 +162,11 @@ class ViewController: UIViewController {
                 display.text=String(format:"%.\(11-numDigits)f",op_1+op_2)
             }
             op_1=0
+            last_op2=op_2
             op_2=0
             operation=""
+            lastOp=true
+            last_operation="+"
 //            op_1=op_2
         }
         else if operation=="-"{
@@ -149,8 +178,11 @@ class ViewController: UIViewController {
                 display.text=String(format:"%.\(11-numDigits)f",op_1-op_2)
             }
             op_1=0
+            last_op2=op_2
             op_2=0
             operation=""
+            lastOp=true
+            last_operation="-"
 //            op_1=op_2
         }
         else if operation=="*"{
@@ -162,8 +194,11 @@ class ViewController: UIViewController {
                 display.text=String(format:"%.\(11-numDigits)f",op_1*op_2)
             }
             op_1=0
+            last_op2=op_2
             op_2=0
             operation=""
+            lastOp=true
+            last_operation="*"
         }
         else if operation=="/"{
             if floor(op_1/op_2)==op_1/op_2{
@@ -174,9 +209,14 @@ class ViewController: UIViewController {
                 display.text=String(format:"%.\(11-numDigits)f",op_1/op_2)
             }
             op_1=0
+            last_op2=op_2
             op_2=0
             operation=""
+            lastOp=true
+            last_operation="/"
+            
         }
+        operation="="
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
