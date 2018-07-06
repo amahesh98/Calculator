@@ -40,6 +40,9 @@ class ViewController: UIViewController {
                 return
             }
         }
+        if display.text!.count==0 && sender.title(for: .normal)!=="0"{
+            return
+        }
         display.text!.append(sender.title(for: .normal)!)
     }
     
@@ -138,6 +141,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func equalPushed(_ sender: UIButton) {
+        if String(op_1).count >= 12 || String(op_2).count >= 12{
+            display.text="OVERLOAD"
+            return
+        }
         if operation==""{
             return
         }
